@@ -84,10 +84,13 @@ const prev = document.querySelector(".prev");
 
 const cover = document.querySelectorAll(".cover");
 cover[activeGame].classList.add("active");
+
 const title = document.querySelectorAll(".game_title");
 title[activeGame].classList.add("active");
+
 const text = document.querySelectorAll(".game_description");
 text[activeGame].classList.add("active");
+
 const thumb = document.querySelectorAll(".thumbnail_img");
 thumb[activeGame].classList.add("target");
 
@@ -96,11 +99,67 @@ thumb[activeGame].classList.add("target");
 next.addEventListener("click", function (){
   console.log("Clicked on the Next Button");
 
+  // Rimozione delle classi di selezione
+
+  cover[activeGame].classList.remove("active");
+  title[activeGame].classList.remove("active");
+  text[activeGame].classList.remove("active");
+  thumb[activeGame].classList.remove("target");
+  activeGame++;
+
+  // Verifico se activeGame è più grande dell'ultimo valore dell'indice di cover, se è così lo resetto a 0
+
+  if (activeGame >= cover.length){
+    activeGame = 0;
+  }
+
+  // Genero delle variabili per le successive cover,title,text,thumb
+
+  const nextCover = cover[activeGame];
+  const nextTitle = title[activeGame];
+  const nextText = text[activeGame];
+  const nextThumb = thumb[activeGame];
+
+  // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb 
+
+  nextCover.classList.add("active");
+  nextTitle.classList.add("active");
+  nextText.classList.add("active");
+  nextThumb.classList.add("target");
+
 })
 
 // Event Listener per il pulsante PREV
 
 prev.addEventListener("click", function (){
   console.log("Clicked on the Previous Button");
+
+    // Rimozione delle classi di selezione
+
+    cover[activeGame].classList.remove("active");
+    title[activeGame].classList.remove("active");
+    text[activeGame].classList.remove("active");
+    thumb[activeGame].classList.remove("target");
+    activeGame--;
+  
+    // Verifico se activeGame è negativo, riportalo all'ultimo indice dell'array
+  
+    if (activeGame < 0){
+      activeGame = cover.length - 1;
+    }
+  
+    // Genero delle variabili per le successive cover,title,text,thumb
+  
+    const nextCover = cover[activeGame];
+    const nextTitle = title[activeGame];
+    const nextText = text[activeGame];
+    const nextThumb = thumb[activeGame];
+  
+    // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb 
+  
+    nextCover.classList.add("active");
+    nextTitle.classList.add("active");
+    nextText.classList.add("active");
+    nextThumb.classList.add("target");
 
 })
