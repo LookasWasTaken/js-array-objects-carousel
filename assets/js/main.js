@@ -1,113 +1,54 @@
+/*
+Dato un array di oggetti letterali con:
+url dell’immagine
+titolo
+descrizione
+Creare un carosello come nella foto allegata.
+Milestone 0:
+Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
+Milestone 1:
+Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
+Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+Milestone 2:
+Aggiungere il ciclo infinito del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso destra, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sinistra.
+BONUS 1:
+Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
+BONUS 2:
+Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
+BONUS 3:
+Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+*/
+
 // array
 
 const images = [
-  "./assets/img/01.webp",
-  "./assets/img/02.webp",
-  "./assets/img/03.webp",
-  "./assets/img/04.webp",
-  "./assets/img/05.webp",
+  {
+      image: 'img/01.webp',
+      title: 'Marvel\'s Spiderman Miles Morales',
+      text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+  },
+  
+  {
+      image: 'img/02.webp',
+      title: 'Ratchet & Clank: Rift Apart',
+      text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+  },
+  
+  {
+      image: 'img/03.webp',
+      title: 'Fortnite',
+      text: "Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.",
+  },
+  
+  {
+      image: 'img/04.webp',
+      title: 'Stray',
+      text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+  },
+  
+  {
+      image: 'img/05.webp',
+      title: "Marvel's Avengers",
+      text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
+  }
 ];
-
-// image selector
-
-let activeImage = 0;
-
-// DOM img selector
-
-const imagesElement = document.querySelector(".images");
-
-// for Loop
-
-for (let i = 0; i < images.length; i++) {
-  const imgSrc = images[i];
-  let imgClasses = "img-fluid";
-  if (i === activeImage) {
-    imgClasses += " active";
-  }
-  const imgElement = `<img class="${imgClasses}" src="${imgSrc}" alt="">`;
-  console.log(imgElement);
-
-  imagesElement.insertAdjacentHTML("beforeend", imgElement);
-}
-
-// select the slides
-
-const slideImagesElements = document.querySelectorAll(".images > img");
-
-// Thumbnail
-
-const thumbnailElement = document.querySelector(".thumbnail");
-
-for (let i = 0; i < images.length; i++) {
-  const thumbnailSrc = images[i];
-  const imgThumbnail = document.createElement("img");
-  imgThumbnail.setAttribute("src", thumbnailSrc);
-  if (i === activeImage) {
-    imgThumbnail.classList.add("target");
-  }
-  thumbnailElement.appendChild(imgThumbnail);
-}
-
-const thumbnailImages = document.querySelectorAll(".thumbnail > img");
-
-// event listener NEXT
-
-const nextEl = document.querySelector(".next");
-nextEl.addEventListener("click", function () {
-  console.log("Clicked on the Next Button");
-
-  // select the current Slide
-  const currentSlide = slideImagesElements[activeImage];
-  console.log(currentSlide);
-  const currentThumbnail = thumbnailImages[activeImage];
-  console.log(currentThumbnail);
-
-  // remove active class from the active image
-  currentSlide.classList.remove("active");
-  currentThumbnail.classList.remove("target");
-  // increment the value of the activeImage variable
-  activeImage++;
-  // check if activeImage is greater than the last index of the slideImagesElements array
-  if (activeImage >= slideImagesElements.length) {
-    // reset activeImage to 0 to start over the carousel
-    activeImage = 0;
-  }
-  // select the next slide
-  const nextImage = slideImagesElements[activeImage];
-  const nextThumb = thumbnailImages[activeImage];
-  // add the active class
-  console.log(nextImage);
-  console.log(nextThumb);
-  nextImage.classList.add("active");
-  nextThumb.classList.add("target");
-});
-
-// Event Listener PREV
-const prevEl = document.querySelector(".prev");
-prevEl.addEventListener("click", function () {
-  console.log("Clicked on the Prev Button");
-
-  // select current slide
-  const currentSlide = slideImagesElements[activeImage];
-  console.log(currentSlide);
-  const currentThumbnail = thumbnailImages[activeImage];
-  console.log(currentThumbnail);
-
-  // remove active class from the active image
-  currentSlide.classList.remove("active");
-  currentThumbnail.classList.remove("target");
-  // decrement the value of the activeimage variable
-  activeImage--;
-  // check if activeImage is negative, reset to last index of array
-  if (activeImage < 0) {
-    activeImage = slideImagesElements.length - 1;
-  }
-  // select the next slide
-  const nextImage = slideImagesElements[activeImage];
-  const nextThumb = thumbnailImages[activeImage];
-  // add the active class
-  console.log(nextImage);
-  console.log(nextThumb);
-  nextImage.classList.add("active");
-  nextThumb.classList.add("target");
-});
