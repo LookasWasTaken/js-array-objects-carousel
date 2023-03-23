@@ -28,7 +28,7 @@ body {
     position: relative;
 }
 
-h1 {
+h1, h3, h4 {
     margin: 7rem 0;
     color: white;
     filter: drop-shadow(0 0 5px rgb(24, 143, 227));

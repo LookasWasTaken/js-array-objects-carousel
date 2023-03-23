@@ -23,56 +23,84 @@ Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 const images = [
   {
-      image: 'img/01.webp',
-      title: 'Marvel\'s Spiderman Miles Morales',
-      text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+    image: "img/01.webp",
+    title: "Marvel's Spiderman Miles Morales",
+    text: "Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.",
   },
-  
+
   {
-      image: 'img/02.webp',
-      title: 'Ratchet & Clank: Rift Apart',
-      text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+    image: "img/02.webp",
+    title: "Ratchet & Clank: Rift Apart",
+    text: "Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.",
   },
-  
+
   {
-      image: 'img/03.webp',
-      title: 'Fortnite',
-      text: "Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.",
+    image: "img/03.webp",
+    title: "Fortnite",
+    text: "Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.",
   },
-  
+
   {
-      image: 'img/04.webp',
-      title: 'Stray',
-      text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+    image: "img/04.webp",
+    title: "Stray",
+    text: "Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city",
   },
-  
+
   {
-      image: 'img/05.webp',
-      title: "Marvel's Avengers",
-      text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
-  }
+    image: "img/05.webp",
+    title: "Marvel's Avengers",
+    text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
+  },
 ];
+
+// Designo DIV diversi come contenitori dei miei tre attribuiti degli oggetti all'interno dell'array di oggetti
 
 const carousel = document.querySelector(".images");
 const carouselName = document.querySelector(".name");
 const carouselText = document.querySelector(".descriptions");
+const thumbnail = document.querySelector(".thumbnail");
+
+// ciclo for Each all'interno dell'array images
+// quindi: PER OGNI elemento dell'array IMAGES passo il parametro/props GAME
+// modifico quindi l'innerHTML dei DIV contenitori
 
 images.forEach((game) => {
   carouselName.innerHTML += `<h3 class="game_title">${game.title}</h3>`;
   carousel.innerHTML += `<img class="cover" src="./assets/${game.image}">`;
   carouselText.innerHTML += `<h4 class="game_description">${game.text}</h4>`;
+  thumbnail.innerHTML += `<img class="thumbnail_img" src="./assets/${game.image}">`;
 });
 
+// Variabile a 0 per modificare l'elemento visualizzato
+
+let activeGame = 0;
+
+// Seleziono il pulsante next e previous
+
+const next = document.querySelector(".next");
+const prev = document.querySelector(".prev");
+
+// Attivazione della classe "ACTIVE" per la rimozione del Display None (e target per la thumbnail)
+
 const cover = document.querySelectorAll(".cover");
-cover[0].classList.add("active");
+cover[activeGame].classList.add("active");
 const title = document.querySelectorAll(".game_title");
-title[0].classList.add("active");
+title[activeGame].classList.add("active");
 const text = document.querySelectorAll(".game_description");
-text[0].classList.add("active");
+text[activeGame].classList.add("active");
+const thumb = document.querySelectorAll(".thumbnail_img");
+thumb[activeGame].classList.add("target");
 
+// Event Listener per il pulsante NEXT
 
-/*
-const leftArrow = document.querySelector(".fa-chevron-left");
-const rightArrow = document.querySelector(".fa-chevron-right");
+next.addEventListener("click", function (){
+  console.log("Clicked on the Next Button");
 
-let activeMovie = 0; */
+})
+
+// Event Listener per il pulsante PREV
+
+prev.addEventListener("click", function (){
+  console.log("Clicked on the Previous Button");
+
+})
