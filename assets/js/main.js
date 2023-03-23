@@ -64,11 +64,11 @@ const thumbnail = document.querySelector(".thumbnail");
 // quindi: PER OGNI elemento dell'array IMAGES passo il parametro/props GAME
 // modifico quindi l'innerHTML dei DIV contenitori
 
-images.forEach((game) => {
+images.forEach((game, index) => {
   carouselName.innerHTML += `<h3 class="game_title">${game.title}</h3>`;
   carousel.innerHTML += `<img class="cover" src="./assets/${game.image}">`;
   carouselText.innerHTML += `<h4 class="game_description">${game.text}</h4>`;
-  thumbnail.innerHTML += `<img class="thumbnail_img" src="./assets/${game.image}">`;
+  thumbnail.innerHTML += `<img class="thumbnail_img" onClick="thumbClick(${index})" index="${index}" src="./assets/${game.image}">`;
 });
 
 // Variabile a 0 per modificare l'elemento visualizzato
@@ -96,7 +96,7 @@ thumb[activeGame].classList.add("target");
 
 // Event Listener per il pulsante NEXT
 
-next.addEventListener("click", function (){
+next.addEventListener("click", function () {
   console.log("Clicked on the Next Button");
 
   // Rimozione delle classi di selezione
@@ -109,7 +109,7 @@ next.addEventListener("click", function (){
 
   // Verifico se activeGame è più grande dell'ultimo valore dell'indice di cover, se è così lo resetto a 0
 
-  if (activeGame >= cover.length){
+  if (activeGame >= cover.length) {
     activeGame = 0;
   }
 
@@ -120,46 +120,87 @@ next.addEventListener("click", function (){
   const nextText = text[activeGame];
   const nextThumb = thumb[activeGame];
 
-  // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb 
+  // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb
 
   nextCover.classList.add("active");
   nextTitle.classList.add("active");
   nextText.classList.add("active");
   nextThumb.classList.add("target");
-
-})
+});
 
 // Event Listener per il pulsante PREV
 
-prev.addEventListener("click", function (){
+prev.addEventListener("click", function () {
   console.log("Clicked on the Previous Button");
 
-    // Rimozione delle classi di selezione
+  // Rimozione delle classi di selezione
 
-    cover[activeGame].classList.remove("active");
-    title[activeGame].classList.remove("active");
-    text[activeGame].classList.remove("active");
-    thumb[activeGame].classList.remove("target");
-    activeGame--;
-  
-    // Verifico se activeGame è negativo, riportalo all'ultimo indice dell'array
-  
-    if (activeGame < 0){
-      activeGame = cover.length - 1;
+  cover[activeGame].classList.remove("active");
+  title[activeGame].classList.remove("active");
+  text[activeGame].classList.remove("active");
+  thumb[activeGame].classList.remove("target");
+  activeGame--;
+
+  // Verifico se activeGame è negativo, riportalo all'ultimo indice dell'array
+
+  if (activeGame < 0) {
+    activeGame = cover.length - 1;
+  }
+
+  // Genero delle variabili per le successive cover,title,text,thumb
+
+  const nextCover = cover[activeGame];
+  const nextTitle = title[activeGame];
+  const nextText = text[activeGame];
+  const nextThumb = thumb[activeGame];
+
+  // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb
+
+  nextCover.classList.add("active");
+  nextTitle.classList.add("active");
+  nextText.classList.add("active");
+  nextThumb.classList.add("target");
+});
+
+function thumbClick(index) {
+
+  // Rimozione delle classi di selezione dalla thumbnail attualmente selezionata
+
+  thumb[activeGame].classList.remove("target");
+
+  // Congruenza della variabile activeGame in base all'indice selezionato
+
+  activeGame = index;
+
+  // Aggiunta della classe di selezione alla nuova thumbnail selezionata
+
+  thumb[activeGame].classList.add("target");
+
+  // Aggiornamento dell'immagine, del titolo e della descrizione in base all'indice selezionato
+
+  cover[activeGame].classList.add("active");
+  title[activeGame].classList.add("active");
+  text[activeGame].classList.add("active");
+
+  // Rimozione della classe di selezione dall'immagine, dal titolo e dalla descrizione precedente
+
+  // Il valore "item" sta per cover/title/text, "index" sta per l'indice
+
+  cover.forEach((item, index) => {
+    if (index !== activeGame) {
+      item.classList.remove("active");
     }
-  
-    // Genero delle variabili per le successive cover,title,text,thumb
-  
-    const nextCover = cover[activeGame];
-    const nextTitle = title[activeGame];
-    const nextText = text[activeGame];
-    const nextThumb = thumb[activeGame];
-  
-    // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb 
-  
-    nextCover.classList.add("active");
-    nextTitle.classList.add("active");
-    nextText.classList.add("active");
-    nextThumb.classList.add("target");
+  });
 
-})
+  title.forEach((item, index) => {
+    if (index !== activeGame) {
+      item.classList.remove("active");
+    }
+  });
+
+  text.forEach((item, index) => {
+    if (index !== activeGame) {
+      item.classList.remove("active");
+    }
+  });
+}
