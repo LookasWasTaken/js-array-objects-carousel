@@ -5,9 +5,9 @@ body {
 /*     overflow: hidden; */
 }
 
-/* .images img:not(.active) {
+.images img:not(.active), .name h3:not(.active), .descriptions h4:not(.active) {
     display: none;
-} */
+}
 
 .active {
     animation: opacity 0.5s ease-in-out;
