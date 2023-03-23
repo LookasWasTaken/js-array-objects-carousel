@@ -2,7 +2,7 @@ body {
     background-image: url(../img/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-/*     overflow: hidden; */
+    overflow: hidden;
 }
 
 .images img:not(.active), .name h3:not(.active), .descriptions h4:not(.active) {
@@ -29,7 +29,7 @@ body {
 }
 
 h1, h3, h4 {
-    margin: 7rem 0;
+    margin: 5rem 0;
     color: white;
     filter: drop-shadow(0 0 5px rgb(24, 143, 227));
 }
