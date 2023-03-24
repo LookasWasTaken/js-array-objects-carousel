@@ -162,8 +162,9 @@ prev.addEventListener("click", function () {
   nextThumb.classList.add("target");
 });
 
-function thumbClick(index) {
+// Funzione inserita nell'onClick delle thumbnail_img
 
+function thumbClick(index) {
   // Rimozione delle classi di selezione dalla thumbnail attualmente selezionata
 
   thumb[activeGame].classList.remove("target");
@@ -183,7 +184,6 @@ function thumbClick(index) {
   text[activeGame].classList.add("active");
 
   // Rimozione della classe di selezione dall'immagine, dal titolo e dalla descrizione precedente
-
   // Il valore "item" sta per cover/title/text, "index" sta per l'indice
 
   cover.forEach((item, index) => {
@@ -204,3 +204,34 @@ function thumbClick(index) {
     }
   });
 }
+
+setInterval(function () {
+
+  // Rimozione delle classi di selezione
+
+  cover[activeGame].classList.remove("active");
+  title[activeGame].classList.remove("active");
+  text[activeGame].classList.remove("active");
+  thumb[activeGame].classList.remove("target");
+  activeGame++;
+
+  // Verifico se activeGame è più grande dell'ultimo valore dell'indice di cover, se è così lo resetto a 0
+
+  if (activeGame >= cover.length) {
+    activeGame = 0;
+  }
+
+  // Genero delle variabili per le successive cover,title,text,thumb
+
+  const nextCover = cover[activeGame];
+  const nextTitle = title[activeGame];
+  const nextText = text[activeGame];
+  const nextThumb = thumb[activeGame];
+
+  // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb
+
+  nextCover.classList.add("active");
+  nextTitle.classList.add("active");
+  nextText.classList.add("active");
+  nextThumb.classList.add("target");;
+}, 3000);
