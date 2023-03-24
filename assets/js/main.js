@@ -80,6 +80,13 @@ let activeGame = 0;
 const next = document.querySelector(".next");
 const prev = document.querySelector(".prev");
 
+// Seleziono i pulsanti backward/forward e play/stop
+
+const play = document.querySelector(".play");
+const stop = document.querySelector(".stop");
+const backward = document.querySelector(".backward");
+const forward = document.querySelector(".forward");
+
 // Attivazione della classe "ACTIVE" per la rimozione del Display None (e target per la thumbnail)
 
 const cover = document.querySelectorAll(".cover");
@@ -205,7 +212,7 @@ function thumbClick(index) {
   });
 }
 
-setInterval(function () {
+const autoPlay = setInterval(function () {
 
   // Rimozione delle classi di selezione
 
@@ -235,3 +242,4 @@ setInterval(function () {
   nextText.classList.add("active");
   nextThumb.classList.add("target");;
 }, 3000);
+

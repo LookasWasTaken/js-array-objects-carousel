@@ -5,7 +5,9 @@ body {
     overflow: hidden;
 }
 
-.images img:not(.active), .name h3:not(.active), .descriptions h4:not(.active) {
+.images img:not(.active),
+.name h3:not(.active),
+.descriptions h4:not(.active) {
     display: none;
 }
 
@@ -15,7 +17,7 @@ body {
 }
 
 @keyframes opacity {
-    0%{
+    0% {
         opacity: 0;
     }
 
@@ -28,7 +30,9 @@ body {
     position: relative;
 }
 
-h1, h3, h4 {
+h1,
+h3,
+h4 {
     margin: 5rem 0;
     color: white;
     filter: drop-shadow(0 0 5px rgb(24, 143, 227));
@@ -55,7 +59,7 @@ h1, h3, h4 {
     scale: 0.90;
 }
 
-.thumbnail img:not(.target):hover{
+.thumbnail img:not(.target):hover {
     cursor: pointer;
 }
 
@@ -72,6 +76,32 @@ h1, h3, h4 {
     color: white;
 }
 
+.backward,
+.play,
+.stop,
+.forward {
+    border: none;
+    background-color: rgba(232, 182, 182, 0);
+    width: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 25px;
+    transition: all 0.5s;
+    color: white;
+    scale: 2.5;
+    margin: 1rem;
+    filter: drop-shadow(0 0 5px rgb(24, 143, 227));
+}
+
+.backward:active,
+.play:active,
+.stop:active,
+.forward:active {
+    scale: 3;
+    color: black;
+}
+
+
+
 .prev {
     top: -15%;
     left: 50%;
@@ -86,13 +116,13 @@ button:active {
     scale: 1.5;
 }
 
-.linksub{
+.linksub {
     animation: shake 3s linear infinite;
     scale: 1;
     transition: all 0.5s;
 }
 
-.linksub:hover{
+.linksub:hover {
     scale: 25;
     color: rgb(87, 7, 87);
 }
