@@ -212,10 +212,17 @@ function thumbClick(index) {
   });
 }
 
-const autoPlay = setInterval(function () {
+// Variabile per selezionare il tempo di autoplay
 
-  // Rimozione delle classi di selezione
+let autoplayInterval = 3000;
 
+// Variabile per il reset del timer dell'autoplay
+
+let autoplayTimer;
+
+// Funzione per muovermi alla slide successiva
+
+function nextSlide() {
   cover[activeGame].classList.remove("active");
   title[activeGame].classList.remove("active");
   text[activeGame].classList.remove("active");
@@ -240,6 +247,87 @@ const autoPlay = setInterval(function () {
   nextCover.classList.add("active");
   nextTitle.classList.add("active");
   nextText.classList.add("active");
-  nextThumb.classList.add("target");;
-}, 3000);
+  nextThumb.classList.add("target");
+}
 
+// Funzione per muovermi alla slide precedente
+
+function previousSlide() {
+  cover[activeGame].classList.remove("active");
+  title[activeGame].classList.remove("active");
+  text[activeGame].classList.remove("active");
+  thumb[activeGame].classList.remove("target");
+  activeGame--;
+
+  // Verifico se activeGame è negativo, riportalo all'ultimo indice dell'array
+
+  if (activeGame < 0) {
+    activeGame = cover.length - 1;
+  }
+
+  // Genero delle variabili per le successive cover,title,text,thumb
+
+  const nextCover = cover[activeGame];
+  const nextTitle = title[activeGame];
+  const nextText = text[activeGame];
+  const nextThumb = thumb[activeGame];
+
+  // Aggiunzione delle classi di selezione alle successive cover,title,text,thumb
+
+  nextCover.classList.add("active");
+  nextTitle.classList.add("active");
+  nextText.classList.add("active");
+  nextThumb.classList.add("target");
+}
+
+// Funzione per l'avvio dell'autoPlay
+
+function startAutoplay() {
+  autoplayTimer = setInterval(nextSlide, autoplayInterval);
+}
+
+// Funzione per l'avvio dell'autoPlay
+
+function reverseStartAutoplay() {
+  autoplayTimer = setInterval(previousSlide, autoplayInterval);
+}
+
+// Funzione per lo stop dell'autoPlay
+
+function stopAutoplay() {
+  clearInterval(autoplayTimer);
+}
+
+// Event Listener per il pulsante PLAY
+
+play.addEventListener("click", function () {
+  console.log("Clicked on the Play Button");
+  startAutoplay();
+});
+
+// Event Listener per il pulsante STOP
+
+stop.addEventListener("click", function () {
+  console.log("Clicked on the Stop Button");
+  stopAutoplay();
+});
+
+// Event Listener per il pulsante BACKWARD
+
+backward.addEventListener("click", function () {
+  console.log("Clicked on the Backward Button");
+  stopAutoplay();
+  previousSlide();
+  reverseStartAutoplay();
+});
+
+// Event Listener per il pulsante FORWARD
+
+forward.addEventListener("click", function () {
+  console.log("Clicked on the Forward Button");
+  stopAutoplay();
+  startAutoplay();
+});
+
+// Funzione di autoPlay attiva al caricamento della pagina
+startAutoplay();
